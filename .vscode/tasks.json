@@ -1,6 +1,13 @@
 {
     "version": "0.1.0",
     "command": "make",
-    "isShellCommand": true,
-    "args": ["predictor"]
+    "tasks": [
+        {
+            "taskName": "predictor",
+            "isBuildCommand": true
+        },
+        {
+            "taskName": "clean"
+        }
+    ]
 }
