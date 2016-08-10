@@ -1,4 +1,4 @@
-CXX = clang
+CXX = clang++
 CXX_FLAGS = -Wfatal-errors -Wall -Wextra -Wpedantic -Wconversion -Wshadow
 
 # Final binary
