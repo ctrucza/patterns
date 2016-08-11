@@ -10,23 +10,6 @@ private:
     std::vector<T> history;
     std::map< std::vector<T>, int> patterns;
 
-    void check(size_t start, size_t matching_start, size_t length){
-        for(size_t i = 0; i < length; ++i){
-            if (history[start+i] != history[matching_start+i])
-                return;
-        }
-
-        auto pattern = std::vector<T>(history.begin()+(long)start, history.begin()+long(start+length));
-        patterns[pattern]++;
-    }
-
-    void find_matches_of(size_t start, size_t length){
-        for(size_t matching_start = start+length; matching_start < history.size(); matching_start++ )
-        {
-            patterns[std::vector<T>(history.begin()+(long)matching_start, history.begin()+(long)(matching_start+length))]++;
-        }
-    }
-
     void find_patterns_of_length(size_t length){
         for(size_t start = 0; start < history.size()-length+1; ++start){
             patterns[std::vector<T>(history.begin()+(long)start, history.begin()+(long)(start+length))]++;
@@ -42,8 +25,8 @@ public:
         std::cerr << "added " << signal << " (" << history.size() << ")" << std::endl;
     }
 
-    void find_patterns(){
-        for(size_t length = 2; length < history.size(); length++){
+    void find_patterns(size_t min, size_t max){
+        for(size_t length = min; length <= max; length++){
             std::cerr << "finding patterns of length " << length << std::endl;
             find_patterns_of_length(length);
             std::cerr << "total patterns so far: " << patterns.size() << std::endl;
