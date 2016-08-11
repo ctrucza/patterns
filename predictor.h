@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include <iterator>
+#include <istream>
 
 template <typename T>
 class Predictor {
@@ -20,6 +21,13 @@ private:
         std::copy(pattern.begin(), pattern.end(), std::ostream_iterator<T>(std::cout, " ")); 
     }
 public:
+    void read(std::istream& s){
+        std::string n;
+        while(s >> n){
+            add(n);
+        }
+    }
+
     void add(T signal){
         history.push_back(signal);
         std::cerr << "added " << signal << " (" << history.size() << ")" << std::endl;
