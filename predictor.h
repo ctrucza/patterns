@@ -7,8 +7,9 @@
 template <typename T>
 class Predictor {
 private:
-    std::vector<T> history;
-    std::map< std::vector<T>, int> patterns;
+    typedef std::vector<T> Sequence;
+    Sequence history;
+    std::map< Sequence, int> patterns;
 
     void add(T signal){
         history.push_back(signal);
@@ -16,12 +17,16 @@ private:
     }
 
     void find_patterns_of_length(size_t length){
-        for(size_t start = 0; start < history.size()-length+1; ++start){
-            patterns[std::vector<T>(history.begin()+(long)start, history.begin()+(long)(start+length))]++;
+        auto begin = history.begin();
+        auto last_begin = history.end()-(long)(length)+1;
+        while (begin != last_begin){
+            auto end = begin + long(length);
+            patterns[Sequence(begin, end)]++;
+            begin++;
         }
     }
 
-    void dump_pattern(const std::vector<T>& pattern){
+    void dump_pattern(const Sequence& pattern){
         std::copy(pattern.begin(), pattern.end(), std::ostream_iterator<T>(std::cout, " ")); 
     }
 
