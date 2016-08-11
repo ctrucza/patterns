@@ -7,8 +7,6 @@ int main(int argc, char** argv){
 
     Predictor<std::string> p;
     p.read(std::cin);
-
     p.find_patterns(options.min, options.max);
-
     p.dump_patterns();
 }
