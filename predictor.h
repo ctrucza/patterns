@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 #include <map>
@@ -11,6 +10,11 @@ private:
     std::vector<T> history;
     std::map< std::vector<T>, int> patterns;
 
+    void add(T signal){
+        history.push_back(signal);
+        std::cerr << "added " << signal << " (" << history.size() << ")" << std::endl;
+    }
+
     void find_patterns_of_length(size_t length){
         for(size_t start = 0; start < history.size()-length+1; ++start){
             patterns[std::vector<T>(history.begin()+(long)start, history.begin()+(long)(start+length))]++;
@@ -20,17 +24,13 @@ private:
     void dump_pattern(const std::vector<T>& pattern){
         std::copy(pattern.begin(), pattern.end(), std::ostream_iterator<T>(std::cout, " ")); 
     }
+
 public:
     void read(std::istream& s){
-        std::string n;
+        T n;
         while(s >> n){
             add(n);
         }
-    }
-
-    void add(T signal){
-        history.push_back(signal);
-        std::cerr << "added " << signal << " (" << history.size() << ")" << std::endl;
     }
 
     void find_patterns(size_t min, size_t max){
