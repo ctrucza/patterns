@@ -1,6 +1,6 @@
 #include <string>
 #include "options.h"
-#include "predictor.h"
+#include "patterns.h"
 
 int main(int argc, char** argv){
     Options options(argc, argv);

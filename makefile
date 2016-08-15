@@ -2,7 +2,7 @@ CXX = clang++ -std=c++11
 CXX_FLAGS = -Wfatal-errors -Wall -Wextra -Wpedantic -Wconversion -Wshadow 
 
 # Final binary
-BIN = predictor
+BIN = patterns
 
 # Put all auto generated stuff to this build dir.
 BUILD_DIR = ./build

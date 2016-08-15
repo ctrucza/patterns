@@ -3,7 +3,7 @@
     "command": "make",
     "tasks": [
         {
-            "taskName": "predictor",
+            "taskName": "patterns",
             "isBuildCommand": true
         },
         {
