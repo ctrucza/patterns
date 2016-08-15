@@ -38,13 +38,19 @@ private:
 
     template <typename U> 
     friend std::ostream& operator<<(std::ostream& os, const Patterns<U>& p);
-public:
-    void read(std::istream& s){
+
+    std::istream& read(std::istream& s){
         T n;
         while(s >> n){
             add(n);
         }
+        return s;
     }
+
+    template <typename U>
+    friend std::istream& operator>>(std::istream& is, Patterns<U>& p);
+
+public:
 
     void find_patterns(size_t min, size_t max){
         for(size_t length = min; length <= max; length++){
@@ -58,4 +64,9 @@ public:
 template <typename T>
 std::ostream& operator<<(std::ostream& os, const Patterns<T>& p){
     return p.write(os);
+}
+
+template <typename T>
+std::istream& operator>>(std::istream& is, Patterns<T>& p){
+    return p.read(is);
 }

@@ -6,7 +6,7 @@ int main(int argc, char** argv){
     Options options(argc, argv);
 
     Patterns<std::string> p;
-    p.read(std::cin);
+    std::cin >> p;
     p.find_patterns(options.min, options.max);
     std::cout << p;
 }
