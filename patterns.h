@@ -10,7 +10,7 @@ class Patterns {
 private:
     typedef std::vector<T> Sequence;
     Sequence history;
-    std::map< Sequence, int> patterns;
+    std::map<Sequence, int> patterns;
 
     void find_patterns_of_length(size_t length){
         auto begin = history.begin();
