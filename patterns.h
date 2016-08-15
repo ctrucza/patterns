@@ -5,7 +5,7 @@
 #include <istream>
 
 template <typename T>
-class Predictor {
+class Patterns {
 private:
     typedef std::vector<T> Sequence;
     Sequence history;
