@@ -3,6 +3,7 @@
 #include <map>
 #include <iterator>
 #include <istream>
+#include <ostream>
 
 template <typename T>
 class Patterns {
@@ -26,10 +27,17 @@ private:
         }
     }
 
-    void dump_pattern(const Sequence& pattern){
-        std::copy(pattern.begin(), pattern.end(), std::ostream_iterator<T>(std::cout, " ")); 
+    std::ostream& write(std::ostream& os) const{
+        for(auto i = patterns.begin(); i != patterns.end(); ++i){
+            os << i->second << "\t" << i->first.size() << "\t";
+            std::copy(i->first.begin(), i->first.end(), std::ostream_iterator<T>(os, " ")); 
+            os << std::endl;
+        }
+        return os;
     }
 
+    template <typename U> 
+    friend std::ostream& operator<<(std::ostream& os, const Patterns<U>& p);
 public:
     void read(std::istream& s){
         T n;
@@ -45,12 +53,9 @@ public:
             std::cerr << "total patterns so far: " << patterns.size() << std::endl;
         }
     }
-
-    void dump_patterns(){
-        for(auto i = patterns.begin(); i != patterns.end(); ++i){
-            std::cout << i->second << "\t" << i->first.size() << "\t";
-            dump_pattern(i->first);
-            std::cout << std::endl;
-        }
-    }
 };
+
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const Patterns<T>& p){
+    return p.write(os);
+}
