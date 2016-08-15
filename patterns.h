@@ -12,11 +12,6 @@ private:
     Sequence history;
     std::map< Sequence, int> patterns;
 
-    void add(T signal){
-        history.push_back(signal);
-        std::cerr << "added " << signal << " (" << history.size() << ")" << std::endl;
-    }
-
     void find_patterns_of_length(size_t length){
         auto begin = history.begin();
         auto last_begin = history.end()-(long)(length)+1;
@@ -39,12 +34,9 @@ private:
     template <typename U> 
     friend std::ostream& operator<<(std::ostream& os, const Patterns<U>& p);
 
-    std::istream& read(std::istream& s){
-        T n;
-        while(s >> n){
-            add(n);
-        }
-        return s;
+    std::istream& read(std::istream& is){
+        std::copy(std::istream_iterator<T>(is), std::istream_iterator<T>(), back_inserter(history));
+        return is;
     }
 
     template <typename U>
