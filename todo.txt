@@ -1,10 +1,3 @@
-Predictor: 
-- make read and dump stream operations
-- detect patterns as we read the stream
-    start from the new end of the stream and find all new patterns:
-        for int length = min_length to max_length
-            new pattern = history[end]..history[end-length].reverse
-
 Do we need to keep copies of the patterns? We could just keep the begin-end pairs, as the history is kept around.
 We can copy them when we save it? (in the future)
 Then we could keep the actual occurences of the patterns, instead of a count of patterns
